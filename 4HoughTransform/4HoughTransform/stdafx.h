@@ -6,3 +6,5 @@
 #pragma once
 
 // TODO:  在此參考您的程式所需要的其他標頭
+#include "mySobel.h"
+#include <vector>

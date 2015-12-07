@@ -68,8 +68,7 @@ namespace CPPWindowsFormsApp {
 		int Height_src;
 		HistogramClass^ myHistogram;
 		SaltPeperClass^ mySaltPepper;
-
-		//enum
+#pragma endregion
 
 	private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
 	private: System::Windows::Forms::SaveFileDialog^  saveFileDialog1;

@@ -27,6 +27,9 @@
     <ClInclude Include="Form1.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="mySobel.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">
@@ -44,6 +47,9 @@
       <Filter>原始程式檔</Filter>
     </ClCompile>
     <ClCompile Include="Form1.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="mySobel.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
   </ItemGroup>
