@@ -1,3 +1,19 @@
 NoiseAndFilter/Debug/
+NoiseAndFilter/ipch/
 Histogram_Equalization/Debug/
+Histogram_Equalization/Histogram_Equalization/
 SpatialFilteringUnsharpMasking/Debug/
+SpatialFilteringUnsharpMasking/ipch/
+4HoughTransform/Debug/
+4HoughTransform/ipch/
+
+# Visual C++ cache files
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
