@@ -5,7 +5,8 @@
 using namespace System;
 using namespace CPPWindowsFormsApp;
 Void Form1::Form1_Load(System::Object^  sender, System::EventArgs^  e){
-
+	sobel_thershold = (double)Form1::numericUpDown1->Value;
+	HT_thershold = (int)Form1::numericUpDown2->Value;
 }
 
 System::Void Form1::openFileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
@@ -32,12 +33,33 @@ System::Void Form1::openFileToolStripMenuItem_Click(System::Object^  sender, Sys
 
 System::Void Form1::getSobelToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
 	if (mSobel == nullptr){
-		mSobel = gcnew mySobel(70); // setup threshold
+		mSobel = gcnew mySobel(sobel_thershold); // setup threshold
+	}
+	else
+		mSobel->setThreshold(sobel_thershold);
+
+	pictureBox2->Image = mSobel->getSobelResult(openFileDialog1->FileName);
+	pictureBox3->Image = mSobel->getdoX();
+	pictureBox4->Image = mSobel->getdoY();	
+}
+
+System::Void Form1::numericUpDown1_ValueChanged(System::Object^  sender, System::EventArgs^  e){
+	this->sobel_thershold = (double)Form1::numericUpDown1->Value;
+}
+
+System::Void Form1::numericUpDown2_ValueChanged(System::Object^  sender, System::EventArgs^  e){
+	this->HT_thershold = (int)Form1::numericUpDown2->Value;
+
+}
+
+System::Void Form1::getHoughToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
+	if (mSobel == nullptr){
+		mSobel = gcnew mySobel(HT_thershold); // setup threshold
 	}
 	else
 		mSobel->reOpen(openFileDialog1->FileName);
 
 	pictureBox2->Image = mSobel->getSobelResult(openFileDialog1->FileName);
-	pictureBox3->Image = mSobel->getdoX();
-	pictureBox4->Image = mSobel->getdoY();	
+	pictureBox3->Image = mSobel->getHoughTransform((int)CPPWindowsFormsApp::Form1::numericUpDown2->Value);
+	pictureBox4->Image = nullptr;
 }

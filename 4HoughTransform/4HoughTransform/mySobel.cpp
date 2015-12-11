@@ -5,6 +5,8 @@ mySobel::mySobel(double input)
 {
 	this->setThreshold(input);
 	this->setKernel();
+	this->pi = 4 * atan(1.0);
+	this->pixelTemp = new int[9];
 }
 
 System::Drawing::Bitmap^ mySobel::getSobelResult(System::String^ fileName_in){
@@ -62,15 +64,15 @@ void mySobel::doSobel(){
 	ptr_y = ImageDataY->Scan0;
 
 	p = (System::Byte*)((System::Void*)ptr);
-	R = (System::Byte*)((System::Void*)ptr_Result);
-	p_x = (System::Byte*)((System::Void*)ptr_x);
-	p_y = (System::Byte*)((System::Void*)ptr_y);
+	R = (System::Byte*)((System::Void*)ptr_Result) + ptr_bit;
+	p_x = (System::Byte*)((System::Void*)ptr_x) + ptr_bit;
+	p_y = (System::Byte*)((System::Void*)ptr_y) + ptr_bit;
 
 	for (int y = 0; y < Height_src; y++){
 		for (int x = 0; x < Width_src; x++){
-			if (x != 0 && y != 0 && x != Width_src && y != Height_src){
+			if (x != 0 && y != 0 && x != Width_src-1 && y != Height_src-1)
+			{
 				int i = 0;
-				this->pixelTemp = new int[9];
 				pixelTemp[0] = p[ptr_bit*((x - 1) + Width_src*(y - 1)) + i];
 				pixelTemp[1] = p[ptr_bit*(x + Width_src*(y - 1)) + i];
 				pixelTemp[2] = p[ptr_bit*((x + 1) + Width_src*(y - 1)) + i];
@@ -95,25 +97,22 @@ void mySobel::doSobel(){
 					sum_y = 255;
 				else
 					sum_y = 0;
-				p_x[0] = sum_x;	//填入像素值 channel 0 (Blue)
-				p_x[1] = sum_x;	//填入像素值 channel 1 (Green)
-				p_x[2] = sum_x;	//填入像素值 channel 2 (Red)
+				p_x[ptr_bit*(x + Width_src*y) + 0] = sum_x;	//填入像素值 channel 0 (Blue)
+				p_x[ptr_bit*(x + Width_src*y) + 1] = sum_x;	//填入像素值 channel 1 (Green)
+				p_x[ptr_bit*(x + Width_src*y) + 2] = sum_x;	//填入像素值 channel 2 (Red)
 
-				p_y[0] = sum_y;	//填入像素值 channel 0 (Blue)
-				p_y[1] = sum_y;	//填入像素值 channel 1 (Green)
-				p_y[2] = sum_y;	//填入像素值 channel 2 (Red)
+				p_y[ptr_bit*(x + Width_src*y) + 0] = sum_y;	//填入像素值 channel 0 (Blue)
+				p_y[ptr_bit*(x + Width_src*y) + 1] = sum_y;	//填入像素值 channel 1 (Green)
+				p_y[ptr_bit*(x + Width_src*y) + 2] = sum_y;	//填入像素值 channel 2 (Red)
 
 				if (sum_x == 255 || sum_y == 255)
 					sum_result = 255;
 				else
 					sum_result = 0;
-				R[0] = sum_result;
-				R[1] = sum_result;
-				R[2] = sum_result;
+				R[ptr_bit*(x + Width_src*y) + 0] = sum_result;
+				R[ptr_bit*(x + Width_src*y) + 1] = sum_result;
+				R[ptr_bit*(x + Width_src*y) + 2] = sum_result;
 			}
-			R += ptr_bit;
-			p_x += ptr_bit;
-			p_y += ptr_bit;
 		}
 	}
 	source->UnlockBits(ImageData1);
@@ -148,6 +147,99 @@ int mySobel::addAll(int *mask_in, bool isX){
 			result += mask_in[i] * this->maskY[i];
 		}
 	}
-	return result;
+	return abs(result);	// return abs of sum
 }
 
+System::Drawing::Bitmap^ mySobel::getHoughTransform(int threshold){
+	this->quantization = gcnew System::Drawing::Bitmap(
+		180, 2 * sqrt(Width_src*Width_src + Height_src*Height_src),
+		System::Drawing::Imaging::PixelFormat::Format24bppRgb);
+
+	this->quan_size = this->quantization->Width*this->quantization->Height;
+	this->quan_Height= round(sqrt(Width_src*Width_src+Height_src*Height_src));
+
+	this->quan_rect = System::Drawing::Rectangle(0, 0, 180, (int)round(2 * sqrt(Width_src*Width_src + Height_src*Height_src)));	//設定rect範圍大小
+
+	this->ImageData1 = result->LockBits(rect,
+		System::Drawing::Imaging::ImageLockMode::ReadWrite, result->PixelFormat);
+	this->ImageData2 = quantization->LockBits(quan_rect,
+		System::Drawing::Imaging::ImageLockMode::ReadWrite, quantization->PixelFormat);
+
+	ptr = ImageData1->Scan0;
+	ptr_Result = ImageData2->Scan0;
+
+	p = (System::Byte*)((System::Void*)ptr);
+	R = (System::Byte*)((System::Void*)ptr_Result);
+	myLine = new line[imageSize];
+	int line_count = 0;
+	for (int y = 0; y < Height_src; y++){
+		for (int x = 0; x < Width_src; x++){
+			if (p[ptr_bit*(x + Width_src*y) + 0] == 255){
+				for (int angle = -90; angle <= 90; angle++){
+					// Sin, Cos are used the radians. Multiply by Math.PI/180 to convert degrees to radians.
+					int rho = round(
+						x*cos(angle*pi / 180) +
+						y*sin(angle*pi / 180)
+						);
+					int point;
+					if (rho > 0){
+						if (rho <= quan_Height){
+							// point = x + width * y
+							point = (angle + 90) + (180 * (rho + quan_Height));
+						}
+					}
+					else{
+						if (rho >= -1 * quan_Height){
+							point = (angle + 90) + (180 * (rho + quan_Height));
+						}
+					}
+					if (R[ptr_bit * point + 2] < 255){
+						R[ptr_bit * point + 0]++;
+						R[ptr_bit * point + 1]++;
+						R[ptr_bit * point + 2]++;
+					}
+
+					if (R[ptr_bit * point + 0] == threshold){
+						R[ptr_bit * point + 0] = 0;
+						R[ptr_bit * point + 1] = 0;
+						R[ptr_bit * point + 2] = 255;
+						myLine[line_count].theta = angle;
+						myLine[line_count].rho = rho;
+						line_count++;
+					}
+				}
+			}
+		}
+	}
+	result->UnlockBits(ImageData1);
+	quantization->UnlockBits(ImageData2);
+
+	this->ImageData1 = result->LockBits(rect,
+		System::Drawing::Imaging::ImageLockMode::ReadWrite, result->PixelFormat);
+	ptr = ImageData1->Scan0;
+	p = (System::Byte*)((System::Void*)ptr);
+
+	if (line_count != 0)
+		for (int i = 0; i < line_count; i++){
+			drawLine(myLine[i].theta, myLine[i].rho);
+		}
+
+	result->UnlockBits(ImageData1);
+
+	return quantization;
+}
+
+void mySobel::drawLine(int theta, int rho){
+	//	角度 = 斜率/(pi/180); 斜率 = 角度*(pi/180)
+	//	y = 斜率*x+C
+	int y;
+	for (int x = 0; x < Width_src; x++){
+
+		y = tan(theta*pi / 180)*x + rho;
+		if (y < Height_src&&y>0){
+			p[ptr_bit*(x + Width_src*y) + 0] = 0;
+			p[ptr_bit*(x + Width_src*y) + 1] = 0;
+			p[ptr_bit*(x + Width_src*y) + 2] = 255;
+		}
+	}
+}

@@ -71,7 +71,15 @@ namespace CPPWindowsFormsApp {
 		//common
 		int Width_src;
 		int Height_src;
-		mySobel^ mSobel;
+
+		double sobel_thershold;
+		int HT_thershold;
+
+	private: System::Windows::Forms::ToolStripMenuItem^  getHoughToolStripMenuItem;
+	private: System::Windows::Forms::NumericUpDown^  numericUpDown1;
+	private: System::Windows::Forms::NumericUpDown^  numericUpDown2;
+	private: System::Windows::Forms::Label^  label2;
+			 mySobel^ mSobel;
 #pragma endregion
 
 #pragma region Windows Form Designer generated code
@@ -92,23 +100,29 @@ namespace CPPWindowsFormsApp {
 			this->openFileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->houghTransformToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->getSobelToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->getHoughToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->numericUpDown1 = (gcnew System::Windows::Forms::NumericUpDown());
+			this->numericUpDown2 = (gcnew System::Windows::Forms::NumericUpDown());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->tableLayoutPanel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox4))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(520, 9);
+			this->label1->Location = System::Drawing::Point(519, 2);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(47, 15);
+			this->label1->Size = System::Drawing::Size(59, 15);
 			this->label1->TabIndex = 0;
-			this->label1->Text = L"label1";
+			this->label1->Text = L"Sobel T";
 			// 
 			// tableLayoutPanel1
 			// 
@@ -145,7 +159,7 @@ namespace CPPWindowsFormsApp {
 			this->pictureBox3->Location = System::Drawing::Point(3, 458);
 			this->pictureBox3->Name = L"pictureBox3";
 			this->pictureBox3->Size = System::Drawing::Size(524, 450);
-			this->pictureBox3->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->pictureBox3->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox3->TabIndex = 2;
 			this->pictureBox3->TabStop = false;
 			// 
@@ -192,13 +206,16 @@ namespace CPPWindowsFormsApp {
 			// openFileToolStripMenuItem
 			// 
 			this->openFileToolStripMenuItem->Name = L"openFileToolStripMenuItem";
-			this->openFileToolStripMenuItem->Size = System::Drawing::Size(162, 26);
+			this->openFileToolStripMenuItem->Size = System::Drawing::Size(156, 26);
 			this->openFileToolStripMenuItem->Text = L"Open File";
 			this->openFileToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::openFileToolStripMenuItem_Click);
 			// 
 			// houghTransformToolStripMenuItem
 			// 
-			this->houghTransformToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->getSobelToolStripMenuItem });
+			this->houghTransformToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->getSobelToolStripMenuItem,
+					this->getHoughToolStripMenuItem
+			});
 			this->houghTransformToolStripMenuItem->Name = L"houghTransformToolStripMenuItem";
 			this->houghTransformToolStripMenuItem->Size = System::Drawing::Size(163, 26);
 			this->houghTransformToolStripMenuItem->Text = L"Hough Transform";
@@ -206,19 +223,60 @@ namespace CPPWindowsFormsApp {
 			// getSobelToolStripMenuItem
 			// 
 			this->getSobelToolStripMenuItem->Name = L"getSobelToolStripMenuItem";
-			this->getSobelToolStripMenuItem->Size = System::Drawing::Size(162, 26);
+			this->getSobelToolStripMenuItem->Size = System::Drawing::Size(166, 26);
 			this->getSobelToolStripMenuItem->Text = L"get Sobel";
 			this->getSobelToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::getSobelToolStripMenuItem_Click);
+			// 
+			// getHoughToolStripMenuItem
+			// 
+			this->getHoughToolStripMenuItem->Name = L"getHoughToolStripMenuItem";
+			this->getHoughToolStripMenuItem->Size = System::Drawing::Size(166, 26);
+			this->getHoughToolStripMenuItem->Text = L"get Hough";
+			this->getHoughToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::getHoughToolStripMenuItem_Click);
 			// 
 			// openFileDialog1
 			// 
 			this->openFileDialog1->FileName = L"openFileDialog1";
+			// 
+			// numericUpDown1
+			// 
+			this->numericUpDown1->Location = System::Drawing::Point(584, 0);
+			this->numericUpDown1->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1000, 0, 0, 0 });
+			this->numericUpDown1->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 20, 0, 0, 0 });
+			this->numericUpDown1->Name = L"numericUpDown1";
+			this->numericUpDown1->Size = System::Drawing::Size(120, 24);
+			this->numericUpDown1->TabIndex = 3;
+			this->numericUpDown1->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 400, 0, 0, 0 });
+			this->numericUpDown1->ValueChanged += gcnew System::EventHandler(this, &Form1::numericUpDown1_ValueChanged);
+			// 
+			// numericUpDown2
+			// 
+			this->numericUpDown2->Location = System::Drawing::Point(796, 0);
+			this->numericUpDown2->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 255, 0, 0, 0 });
+			this->numericUpDown2->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 20, 0, 0, 0 });
+			this->numericUpDown2->Name = L"numericUpDown2";
+			this->numericUpDown2->Size = System::Drawing::Size(120, 24);
+			this->numericUpDown2->TabIndex = 4;
+			this->numericUpDown2->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 120, 0, 0, 0 });
+			this->numericUpDown2->ValueChanged += gcnew System::EventHandler(this, &Form1::numericUpDown2_ValueChanged);
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(710, 2);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(41, 15);
+			this->label2->TabIndex = 5;
+			this->label2->Text = L"HT T";
 			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 14);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1084, 959);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->numericUpDown2);
+			this->Controls->Add(this->numericUpDown1);
 			this->Controls->Add(this->tableLayoutPanel1);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->menuStrip1);
@@ -233,6 +291,8 @@ namespace CPPWindowsFormsApp {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -241,5 +301,8 @@ namespace CPPWindowsFormsApp {
 	private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void getSobelToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void openFileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-	};
+	private: System::Void getHoughToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void numericUpDown1_ValueChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void numericUpDown2_ValueChanged(System::Object^  sender, System::EventArgs^  e);
+};
 }
