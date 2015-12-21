@@ -70,7 +70,7 @@ void mySobel::doSobel(){
 
 	for (int y = 0; y < Height_src; y++){
 		for (int x = 0; x < Width_src; x++){
-			if (x != 0 && y != 0 && x != Width_src-1 && y != Height_src-1)
+			if (x != 0 && y != 0 && x != Width_src - 1 && y != Height_src - 1)
 			{
 				int i = 0;
 				pixelTemp[0] = p[ptr_bit*((x - 1) + Width_src*(y - 1)) + i];
@@ -156,7 +156,7 @@ System::Drawing::Bitmap^ mySobel::getHoughTransform(int threshold){
 		System::Drawing::Imaging::PixelFormat::Format24bppRgb);
 
 	this->quan_size = this->quantization->Width*this->quantization->Height;
-	this->quan_Height= round(sqrt(Width_src*Width_src+Height_src*Height_src));
+	this->quan_Height = round(sqrt(Width_src*Width_src + Height_src*Height_src));
 
 	this->quan_rect = System::Drawing::Rectangle(0, 0, 180, (int)round(2 * sqrt(Width_src*Width_src + Height_src*Height_src)));	//設定rect範圍大小
 
@@ -176,23 +176,15 @@ System::Drawing::Bitmap^ mySobel::getHoughTransform(int threshold){
 		for (int x = 0; x < Width_src; x++){
 			if (p[ptr_bit*(x + Width_src*y) + 0] == 255){
 				for (int angle = -90; angle <= 90; angle++){
-					// Sin, Cos are used the radians. Multiply by Math.PI/180 to convert degrees to radians.
-					int rho = round(
-						x*cos(angle*pi / 180) +
-						y*sin(angle*pi / 180)
-						);
+					//	Sin, Cos are used the radians. Multiply by Math.PI/180 to convert degrees to radians.
+					int rho = x*cos(angle*pi / 180) + y*sin(angle*pi / 180);
+					//	Anotherway : rho = -tan(theta *pi / 180)*x + y;
 					int point;
-					if (rho > 0){
-						if (rho <= quan_Height){
-							// point = x + width * y
-							point = (angle + 90) + (180 * (rho + quan_Height));
-						}
+					if (abs(rho) <= quan_Height){
+						// point = x + width * y
+						point = (angle + 90) + (180 * (rho + quan_Height));
 					}
-					else{
-						if (rho >= -1 * quan_Height){
-							point = (angle + 90) + (180 * (rho + quan_Height));
-						}
-					}
+
 					if (R[ptr_bit * point + 2] < 255){
 						R[ptr_bit * point + 0]++;
 						R[ptr_bit * point + 1]++;
@@ -234,9 +226,9 @@ void mySobel::drawLine(int theta, int rho){
 	//	y = 斜率*x+C
 	int y;
 	for (int x = 0; x < Width_src; x++){
-
-		y = tan(theta*pi / 180)*x + rho;
-		if (y < Height_src&&y>0){
+		y = (rho - cos(theta *(pi / 180))*x) / sin(theta *(pi / 180));
+		//	for Anotherway : y = tan(theta *(pi / 180)) * x + rho;
+		if (y < Height_src && y > 0){
 			p[ptr_bit*(x + Width_src*y) + 0] = 0;
 			p[ptr_bit*(x + Width_src*y) + 1] = 0;
 			p[ptr_bit*(x + Width_src*y) + 2] = 255;

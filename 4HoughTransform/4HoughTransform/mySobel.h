@@ -13,7 +13,7 @@ public:
 	void reOpen(System::String^ fileName);
 	System::Drawing::Bitmap^ getSobelResult(System::String^ fileName_in);
 	System::Drawing::Bitmap^ getHoughTransform(int threshold);
-	void drawLine(int theta,int rho);
+	void drawLine(int theta, int rho);
 	System::Drawing::Bitmap^ getdoX();
 	System::Drawing::Bitmap^ getdoY();
 
