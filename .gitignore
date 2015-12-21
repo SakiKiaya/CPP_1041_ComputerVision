@@ -17,3 +17,8 @@ SpatialFilteringUnsharpMasking/ipch/
 *.psess
 *.vsp
 *.vspx
+*.cache
+SpatialFilteringUnsharpMasking/SpatialFilteringUnsharpMasking/Debug/
+5_RGBtoHSI/5_RGBtoHSI/Debug/
+5_RGBtoHSI/Debug/
+5_RGBtoHSI/ipch/
