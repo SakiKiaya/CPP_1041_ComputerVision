@@ -53,6 +53,10 @@ void HSI::genSrcHistogram(){
 			G = p[ptr_bit*(x + Width_src*y) + 1];
 			R = p[ptr_bit*(x + Width_src*y) + 2];
 
+			R /= 255;
+			G /= 255;
+			B /= 255;
+
 			setSrcHistogramWithI(figureOutI(B, G, R));
 		}
 	}
@@ -62,7 +66,7 @@ void HSI::genSrcHistogram(){
 //	Save I to srcHistogram arrary
 void HSI::setSrcHistogramWithI(double I){
 	int pixel;
-	round(I *= 255);	//	convert I to gray 0~255 level
+	I = round(I * 255);	//	convert I to gray 0~255 level
 
 	//	set Histogram for I
 	if (I > 255){
@@ -78,8 +82,12 @@ void HSI::setSrcHistogramWithI(double I){
 }
 
 //	convert RGB to HSI, return I
-double HSI::figureOutI(int B, int G, int R){
-	double I = (double)(R + G + B) / 3 / 255;
+double HSI::figureOutI(double B, double G, double R){
+	double I = (R + G + B) / 3;
+	if (I < 0)
+		I = 0.0;
+	else if (I>1)
+		I = 1.0;
 	return I;
 }
 
@@ -137,6 +145,7 @@ void HSI::doEqualization(){
 	Res = (Byte*)((System::Void*)ResultPtr);
 
 	double B, G, R, b, g, r, I, S, H, value1, value2, radial, BGR_min;
+
 	for (int y = 0; y < Image1->Height; y++){
 		for (int x = 0; x < Image1->Width; x++){
 			B = p[ptr_bit*(x + Width_src*y) + 0];
@@ -152,24 +161,33 @@ void HSI::doEqualization(){
 			BGR_min = (double)getMinVaule(B, G, R);
 
 			//	透過正規化後的BGR計算HSI
-			I = (R + G + B) / 3;
-			S = (double)(3 / ((double)(R + G + B))*(double)BGR_min);
-			S = 1.0 - S;
+			//	I 介於0~1之間
+			I = figureOutI(B, G, R);
 
+			//	S 介於0~1之間
+			S = (3.0 / (R + G + B)) * BGR_min;
+			S = 1.0 - S;
+			if ((R + G + B) == 0)
+				S = 0.0;
+			else if (S > 1)
+				S = 1.0;
+			//	1/2 * ( (R - G)+(R - B) )
 			value1 = ((R - G) + (R - B)) * 0.5;
+
+			//	( (R-G)^2 + (R-B)(G-B) )^0.5
 			value2 = pow((pow((R - G), 2) + (R - B)*(G - B)), 0.5);
 			radial = value1 / value2;	// 結果為弧可直接套入三角函數
 
 			//	if result is 1.#IND00000000, or 1.#INF00000000
 			//	that mean the result is overflow
+			//	H 介於0~360之間(角度)
 			H = acos(radial);
 			H = H * 180 / PI;	//	to degree
-
-			g = G / I;
-			b = B / I;
-
-			if (g > b){
+			if (B > G){
 				H = round(360.0 - H);
+			}
+			else if(B == G){
+				H = 0;
 			}
 			else{
 				H = round(H);
@@ -182,6 +200,7 @@ void HSI::doEqualization(){
 			Res[ptr_bit*(x + Width_src*y) + 0] = myRGB.B;
 			Res[ptr_bit*(x + Width_src*y) + 1] = myRGB.G;
 			Res[ptr_bit*(x + Width_src*y) + 2] = myRGB.R;
+
 		}
 	}
 
