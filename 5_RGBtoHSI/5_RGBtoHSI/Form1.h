@@ -46,6 +46,8 @@ namespace CPPWindowsFormsApp {
 	private: System::Windows::Forms::ToolStripMenuItem^  getHSIToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  useHSIDoHistogramEqualizationToolStripMenuItem;
 
+
+
 	private:
 		/// <summary>
 		/// 設計工具所需的變數。
@@ -61,14 +63,14 @@ namespace CPPWindowsFormsApp {
 		{
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->openToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->rGBToHSIToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->getHSIToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->useHSIDoHistogramEqualizationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->menuStrip1->SuspendLayout();
 			this->tableLayoutPanel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -91,6 +93,44 @@ namespace CPPWindowsFormsApp {
 			this->menuStrip1->Size = System::Drawing::Size(1272, 27);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// fileToolStripMenuItem
+			// 
+			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->openToolStripMenuItem });
+			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
+			this->fileToolStripMenuItem->Size = System::Drawing::Size(45, 23);
+			this->fileToolStripMenuItem->Text = L"File";
+			// 
+			// openToolStripMenuItem
+			// 
+			this->openToolStripMenuItem->Name = L"openToolStripMenuItem";
+			this->openToolStripMenuItem->Size = System::Drawing::Size(122, 26);
+			this->openToolStripMenuItem->Text = L"Open";
+			this->openToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::openToolStripMenuItem_Click);
+			// 
+			// rGBToHSIToolStripMenuItem
+			// 
+			this->rGBToHSIToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->getHSIToolStripMenuItem,
+					this->useHSIDoHistogramEqualizationToolStripMenuItem
+			});
+			this->rGBToHSIToolStripMenuItem->Name = L"rGBToHSIToolStripMenuItem";
+			this->rGBToHSIToolStripMenuItem->Size = System::Drawing::Size(97, 23);
+			this->rGBToHSIToolStripMenuItem->Text = L"RGB to HSI";
+			// 
+			// getHSIToolStripMenuItem
+			// 
+			this->getHSIToolStripMenuItem->Name = L"getHSIToolStripMenuItem";
+			this->getHSIToolStripMenuItem->Size = System::Drawing::Size(326, 26);
+			this->getHSIToolStripMenuItem->Text = L"Get HSI";
+			this->getHSIToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::getHSIToolStripMenuItem_Click);
+			// 
+			// useHSIDoHistogramEqualizationToolStripMenuItem
+			// 
+			this->useHSIDoHistogramEqualizationToolStripMenuItem->Name = L"useHSIDoHistogramEqualizationToolStripMenuItem";
+			this->useHSIDoHistogramEqualizationToolStripMenuItem->Size = System::Drawing::Size(326, 26);
+			this->useHSIDoHistogramEqualizationToolStripMenuItem->Text = L"use HSI do Histogram Equalization";
+			this->useHSIDoHistogramEqualizationToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::useHSIDoHistogramEqualizationToolStripMenuItem_Click);
 			// 
 			// tableLayoutPanel1
 			// 
@@ -127,44 +167,6 @@ namespace CPPWindowsFormsApp {
 			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox2->TabIndex = 1;
 			this->pictureBox2->TabStop = false;
-			// 
-			// fileToolStripMenuItem
-			// 
-			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->openToolStripMenuItem });
-			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
-			this->fileToolStripMenuItem->Size = System::Drawing::Size(45, 24);
-			this->fileToolStripMenuItem->Text = L"File";
-			// 
-			// openToolStripMenuItem
-			// 
-			this->openToolStripMenuItem->Name = L"openToolStripMenuItem";
-			this->openToolStripMenuItem->Size = System::Drawing::Size(181, 26);
-			this->openToolStripMenuItem->Text = L"Open";
-			this->openToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::openToolStripMenuItem_Click);
-			// 
-			// rGBToHSIToolStripMenuItem
-			// 
-			this->rGBToHSIToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->getHSIToolStripMenuItem,
-					this->useHSIDoHistogramEqualizationToolStripMenuItem
-			});
-			this->rGBToHSIToolStripMenuItem->Name = L"rGBToHSIToolStripMenuItem";
-			this->rGBToHSIToolStripMenuItem->Size = System::Drawing::Size(97, 24);
-			this->rGBToHSIToolStripMenuItem->Text = L"RGB to HSI";
-			// 
-			// getHSIToolStripMenuItem
-			// 
-			this->getHSIToolStripMenuItem->Name = L"getHSIToolStripMenuItem";
-			this->getHSIToolStripMenuItem->Size = System::Drawing::Size(326, 26);
-			this->getHSIToolStripMenuItem->Text = L"Get HSI";
-			this->getHSIToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::getHSIToolStripMenuItem_Click);
-			// 
-			// useHSIDoHistogramEqualizationToolStripMenuItem
-			// 
-			this->useHSIDoHistogramEqualizationToolStripMenuItem->Name = L"useHSIDoHistogramEqualizationToolStripMenuItem";
-			this->useHSIDoHistogramEqualizationToolStripMenuItem->Size = System::Drawing::Size(326, 26);
-			this->useHSIDoHistogramEqualizationToolStripMenuItem->Text = L"use HSI do Histogram Equalization";
-			this->useHSIDoHistogramEqualizationToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::useHSIDoHistogramEqualizationToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
