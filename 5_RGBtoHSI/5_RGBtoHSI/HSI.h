@@ -2,10 +2,17 @@
 
 using namespace System::Drawing;
 struct RGB{
-	int R;
-	int G;
-	int B;
+	double R;
+	double G;
+	double B;
 };
+
+struct Sector
+{
+	int sector;
+	double degree;
+};
+
 ref class HSI
 {
 public:
@@ -19,7 +26,7 @@ private:
 
 	void doHE();	//	use HSI to do Histogram Equ
 	void setSrcHistogramWithI(double I);
-	double figureOutI(int B, int G, int R);	
+	double figureOutI(double B, double G, double R);	
 	void genSrcHistogram();
 	void genEqualization();
 	void doEqualization();
@@ -30,7 +37,7 @@ private:
 	int getMaxVaule();
 	int getMinVaule();
 	double getMinVaule(double B, double G, double R);
-	double getAreaDegree(double degree);
+	Sector getAreaDegree(double degree);
 
 	array<int>^ srcHistogram;
 	array<int>^ HistogramEqualization;
