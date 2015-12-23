@@ -33,5 +33,9 @@ System::Void Form1::getHSIToolStripMenuItem_Click(System::Object^  sender, Syste
 }
 
 System::Void Form1::useHSIDoHistogramEqualizationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
+	if (myHSI != nullptr){
+		delete myHSI;
+		myHSI = gcnew HSI();
+	}
 	pictureBox2->Image = myHSI->getHEResult(openFileDialog1->FileName);
 }
