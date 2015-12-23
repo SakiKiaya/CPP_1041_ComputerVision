@@ -210,46 +210,81 @@ void HSI::doEqualization(){
 
 //	H = degree, S = double, I = I * 255 
 RGB HSI::HSI2RGB(double H, double S, double I){
-	double b, g, r, degree;
+	double b, g, r, degree, value1, value2;
 	RGB result;
-	degree = getAreaDegree(degree);
+	Sector mySec;
 
-	r = (1 - S) / 3;
-	g = (1 + (S*cos(degree * PI / 180)) / cos((60 - degree) * PI / 180)) / 3;
-	b = 1 - (r + b);
+	mySec = getAreaDegree(H);
+	degree = mySec.degree;
+
+	value1 = S * cos(degree * PI / 180);	//	S * Cos(H(degree))
+	value2 = cos((60 - degree) * PI / 180);	//	Cos(60- H(degree))
+
+	switch (mySec.sector){
+	case 0:	//RG sector 0~120
+		b = (1.0 - S) / 3.0;
+		r = (1.0 + (value1 / value2)) / 3.0;
+		g = 1.0 - (r + b);
+		if (round(r + g + b) != 1)
+			int rgb_add = 0;
+		break;
+	case 1:	//GB sector 120~240
+		r = (1.0 - S) / 3.0;
+		g = (1.0 + (value1 / value2)) / 3.0;
+		b = 1.0 - (r + g);
+		if (round(r + g + b) != 1)
+			int rgb_add = 0;
+		break;
+	case 2:	//BR sector 240~360
+		g = (1.0 - S) / 3.0;
+		b = (1.0 + (value1 / value2)) / 3.0;
+		r = 1.0 - (g + b);
+		if (round(r + g + b) != 1)
+			int rgb_add = 0;
+		break;
+	}
+
 
 	I *= 255;	//	轉回原本灰階值;
 
-	result.R = round((double)(3 * I * r));
+	result.R = round((double)(3.0 * I * r));
 	result.R = result.R > 255 ? 255 : result.R;
-	result.G = round((double)(3 * I * g));
+	result.R = result.R < 0 ? 0 : result.R;
+
+	result.G = round((double)(3.0 * I * g));
 	result.G = result.G > 255 ? 255 : result.G;
-	result.B = round((double)(3 * I * b));
+	result.G = result.G < 0 ? 0 : result.G;
+
+	result.B = round((double)(3.0 * I * b));
 	result.B = result.B > 255 ? 255 : result.B;
+	result.R = result.R < 0 ? 0 : result.R;
 	return result;
 }
 
 // 判斷區間
-double HSI::getAreaDegree(double degree){
-	if (0 < degree && degree <= 120){
-		return degree;	//	RG sector
+Sector HSI::getAreaDegree(double degree){
+	Sector mysec;
+	if (0 <= degree && degree <= 120){
+		mysec.degree = degree;
+		mysec.sector = 0;	//	RG sector
 	}
 	else if (120 < degree&&degree <= 240){
-		degree -= 120;	//	GB sector
-		return degree;
+		degree -= 120;
+		mysec.degree = degree;
+		mysec.sector = 1;	//	GB sector
 	}
 	else if (240 < degree&&degree <= 360){
-		degree -= 240;	//	BR sector
-		return degree;
+		degree -= 240;
+		mysec.degree = degree;
+		mysec.sector = 2;	//	BR sector
 	}
+	return mysec;
 }
 
 //	轉換為均衡化後數值
 int HSI::getEqualization(int index){
 	return HistogramEqualization[index];
 }
-
-
 
 //	依影像通道數設定指標移動量
 void HSI::setPtr_bit(System::Drawing::Imaging::PixelFormat input){
