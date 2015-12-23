@@ -117,11 +117,10 @@ int HSI::getMinVaule(){
 
 //	回傳BGR中最小值
 double HSI::getMinVaule(double B, double G, double R){
-	double BGR_min = B;
-	if (BGR_min > G)
-		BGR_min = G;
-	else if (BGR_min > R)
-		BGR_min = R;
+	double BGR_min;
+	if (R <= G&&R <= B) BGR_min = R;
+	if (G <= R&&G <= B) BGR_min = G;
+	if (B <= G&&B <= R) BGR_min = B;
 	return BGR_min;
 }
 
