@@ -62,15 +62,15 @@ namespace CPPWindowsFormsApp {
 		{
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->openFileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->waveletToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->getWaveletToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
-			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->openFileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->waveletToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->getWaveletToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->tableLayoutPanel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -90,9 +90,37 @@ namespace CPPWindowsFormsApp {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(1262, 28);
+			this->menuStrip1->Size = System::Drawing::Size(1262, 27);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// fileToolStripMenuItem
+			// 
+			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->openFileToolStripMenuItem });
+			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
+			this->fileToolStripMenuItem->Size = System::Drawing::Size(45, 23);
+			this->fileToolStripMenuItem->Text = L"File";
+			// 
+			// openFileToolStripMenuItem
+			// 
+			this->openFileToolStripMenuItem->Name = L"openFileToolStripMenuItem";
+			this->openFileToolStripMenuItem->Size = System::Drawing::Size(181, 26);
+			this->openFileToolStripMenuItem->Text = L"Open file";
+			this->openFileToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::openFileToolStripMenuItem_Click);
+			// 
+			// waveletToolStripMenuItem
+			// 
+			this->waveletToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->getWaveletToolStripMenuItem });
+			this->waveletToolStripMenuItem->Name = L"waveletToolStripMenuItem";
+			this->waveletToolStripMenuItem->Size = System::Drawing::Size(77, 23);
+			this->waveletToolStripMenuItem->Text = L"Wavelet";
+			// 
+			// getWaveletToolStripMenuItem
+			// 
+			this->getWaveletToolStripMenuItem->Name = L"getWaveletToolStripMenuItem";
+			this->getWaveletToolStripMenuItem->Size = System::Drawing::Size(165, 26);
+			this->getWaveletToolStripMenuItem->Text = L"Get wavelet";
+			this->getWaveletToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::getWaveletToolStripMenuItem_Click);
 			// 
 			// tableLayoutPanel1
 			// 
@@ -134,9 +162,9 @@ namespace CPPWindowsFormsApp {
 			// pictureBox1
 			// 
 			this->pictureBox1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->pictureBox1->Location = System::Drawing::Point(3, 25);
+			this->pictureBox1->Location = System::Drawing::Point(3, 24);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(624, 687);
+			this->pictureBox1->Size = System::Drawing::Size(624, 688);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox1->TabIndex = 2;
 			this->pictureBox1->TabStop = false;
@@ -144,40 +172,12 @@ namespace CPPWindowsFormsApp {
 			// pictureBox2
 			// 
 			this->pictureBox2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->pictureBox2->Location = System::Drawing::Point(633, 25);
+			this->pictureBox2->Location = System::Drawing::Point(633, 24);
 			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(626, 687);
+			this->pictureBox2->Size = System::Drawing::Size(626, 688);
 			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox2->TabIndex = 3;
 			this->pictureBox2->TabStop = false;
-			// 
-			// fileToolStripMenuItem
-			// 
-			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->openFileToolStripMenuItem });
-			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
-			this->fileToolStripMenuItem->Size = System::Drawing::Size(45, 24);
-			this->fileToolStripMenuItem->Text = L"File";
-			// 
-			// openFileToolStripMenuItem
-			// 
-			this->openFileToolStripMenuItem->Name = L"openFileToolStripMenuItem";
-			this->openFileToolStripMenuItem->Size = System::Drawing::Size(181, 26);
-			this->openFileToolStripMenuItem->Text = L"Open file";
-			this->openFileToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::openFileToolStripMenuItem_Click);
-			// 
-			// waveletToolStripMenuItem
-			// 
-			this->waveletToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->getWaveletToolStripMenuItem });
-			this->waveletToolStripMenuItem->Name = L"waveletToolStripMenuItem";
-			this->waveletToolStripMenuItem->Size = System::Drawing::Size(77, 24);
-			this->waveletToolStripMenuItem->Text = L"Wavelet";
-			// 
-			// getWaveletToolStripMenuItem
-			// 
-			this->getWaveletToolStripMenuItem->Name = L"getWaveletToolStripMenuItem";
-			this->getWaveletToolStripMenuItem->Size = System::Drawing::Size(181, 26);
-			this->getWaveletToolStripMenuItem->Text = L"Get wavelet";
-			this->getWaveletToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::getWaveletToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
@@ -189,6 +189,7 @@ namespace CPPWindowsFormsApp {
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
 			this->Text = L"Form1";
+			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->tableLayoutPanel1->ResumeLayout(false);
@@ -200,9 +201,27 @@ namespace CPPWindowsFormsApp {
 
 		}
 #pragma endregion
-	private: System::Void openFileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-	}
-	private: System::Void getWaveletToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-	}
-	};
+#pragma region 自定義變數
+		//宣告點陣圖的格式
+		Bitmap^ Image1;
+		//宣告圖像區域(設定為欲讀取、欲修正的圖像區域)
+		Rectangle rect;
+		//宣告為一BitmapData型態，表示像素值位置
+		Imaging::BitmapData^ ImageData1;
+		//宣告一int格式的指標
+		IntPtr ptr;
+		//宣告一個Byte格式的指標
+		Byte* p;
+		//宣告一個像素的bit長度，供指標移動參考
+		int ptr_bit = 3;
+		//common
+		int Width_src;
+		int Height_src;
+		Wavelet ^myWavelet;
+#pragma endregion
+
+	private: System::Void openFileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void getWaveletToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e);
+};
 }

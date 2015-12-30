@@ -1,9 +1,12 @@
 #include "stdafx.h"
 #include "Wavelet.h"
 
+using namespace System;
+using namespace System::Drawing;
 
 Wavelet::Wavelet()
 {
+	negative = -1;
 }
 
 #pragma region Common_function
@@ -50,13 +53,122 @@ Bitmap^ Wavelet::getWaveletResult(System::String^ filename){
 }
 
 void Wavelet::doWavelet(){
-	//
-	/*	TODO : Wavelet mothed*/
-	//
+	imageSize input;
+	input.Height = Height_src;
+	input.Width = Width_src;
+	//	First - Source size
+	figureOutLH(input);
+
+	//	Second - Half of Source 
+	input.Height /= 2;
+	input.Width /= 2;
+	//figureOutLH(input);
+
+	//	Third - Quarter of Source
+	//input.Height /= 2;
+	//input.Width /= 2;
+	//figureOutLH(input);
+
 }
 
-void doFirst(){
 
+void Wavelet::figureOutLH_Row(imageSize input){
+	int B, G, R, gray, value1, value2, output, halfWidth;
+	halfWidth = input.Width / 2;
+#pragma region LH1_ROW
+	for (int y = 0; y < Height_src; y++){
+		//L1-ROW
+		for (int x = 0; x < Width_src; x++){
+			if (x + 1 < Width_src&&y + 1 < Height_src){
+				if (x < input.Width&&y < input.Height){
+					value1 = p[ptr_bit*(x * 2 + Width_src*y) + 0];
+					value2 = p[ptr_bit*(x * 2 + Width_src*y) + 3];
+					//	if isH, output = (value1-value2)/2
+					if (x >= halfWidth){
+						output = (value1 + (negative*value2)) / 2;
+					}
+					else{
+						output = (value1 + value2) / 2;
+					}
+				}
+				else{
+					output = p[ptr_bit*(x + Width_src*y * 2) + 0];
+				}
+				Res[ptr_bit*(x + Width_src*y) + 0] = output;
+				Res[ptr_bit*(x + Width_src*y) + 1] = output;
+				Res[ptr_bit*(x + Width_src*y) + 2] = output;
+			}
+		}
+	}
+#pragma endregion 
+}
+
+void Wavelet::figureOutLH_Col(imageSize input){
+	int B, G, R, gray, value1, value2, output, halfHeight;
+	halfHeight = input.Height / 2;
+#pragma region LH1_COL
+	for (int y = 0; y < Height_src; y++){
+		//L1-Col
+		for (int x = 0; x < Width_src; x++){
+			if ((y + 1 < Height_src) && (x + 1 < Width_src)){
+				if (x + 1 < input.Width&&y + 2 < input.Height){
+					value1 = p[ptr_bit*(x + Width_src*(y)) + 0];
+					value2 = p[ptr_bit*(x + Width_src*(y + 1)) + 0];
+					//	if isH, output = (value1-value2)/2
+					if (y >= halfHeight){
+						output = (value1 + (negative*value2)) / 2;
+					}
+					else{
+						output = (value1 + value2) / 2;
+					}
+				}
+				else{
+					output = p[ptr_bit*(x + Width_src*y) + 0];
+				}
+				Res[ptr_bit*(x + Width_src*y) + 0] = output;
+				Res[ptr_bit*(x + Width_src*y) + 1] = output;
+				Res[ptr_bit*(x + Width_src*y) + 2] = output;
+			}
+		}
+	}
+#pragma endregion 
+}
+
+void Wavelet::figureOutLH(imageSize input){
+	Image2 = gcnew System::Drawing::Bitmap(Width_src, Height_src, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
+	ImageData1 = Image1->LockBits(rect, Drawing::Imaging::ImageLockMode::ReadWrite, Image1->PixelFormat);
+	ImageData2 = Image2->LockBits(rect, Drawing::Imaging::ImageLockMode::ReadWrite, Image2->PixelFormat);
+
+	ptr = ImageData1->Scan0;
+	ResultPtr = ImageData2->Scan0;
+
+	p = (Byte*)((System::Void*)ptr);
+	Res = (Byte*)((System::Void*)ResultPtr);
+
+	figureOutLH_Row(input);
+
+	Image1->UnlockBits(ImageData1);
+	Image2->UnlockBits(ImageData2);
+
+	Image1 = Image2;
+
+	Image2 = gcnew System::Drawing::Bitmap(Width_src, Height_src, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
+	ImageData1 = Image1->LockBits(rect, Drawing::Imaging::ImageLockMode::ReadWrite, Image1->PixelFormat);
+	ImageData2 = Image2->LockBits(rect, Drawing::Imaging::ImageLockMode::ReadWrite, Image2->PixelFormat);
+	ptr = ImageData1->Scan0;
+	ResultPtr = ImageData2->Scan0;
+
+	p = (Byte*)((System::Void*)ptr);
+	Res = (Byte*)((System::Void*)ResultPtr);
+
+	figureOutLH_Col(input);
+
+	Image1->UnlockBits(ImageData1);
+	Image2->UnlockBits(ImageData2);
 }
 
 #pragma endregion
+
+int RGB2Gray(int R, int G, int B){
+	return (R + G + B) / 3;
+}
