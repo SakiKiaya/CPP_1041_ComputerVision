@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Wavelet.h"
 
 using namespace cv;
@@ -53,7 +53,7 @@ void Wavelet::figureOutLH_Row(cv::Size input){
 	int halfWidth = input.width / 2;
 	int temp, value1, value2, x_temp;
 	bool isLeft = true;
-	//	¥ı°µL¡A¦b°µH¡A¦@°µ¨â¦¸
+	//	å…ˆåšLï¼Œåœ¨åšHï¼Œå…±åšå…©æ¬¡
 	for (int i = 0; i < 2; i++){
 		for (int y = 0; y < Height_src; y++){
 			for (int x = 0; x < Width_src; x += 2){
@@ -67,7 +67,7 @@ void Wavelet::figureOutLH_Row(cv::Size input){
 							x_temp = x / 2;
 						}
 						else{
-							//	ROW-H	±N±qµe­±ªº¤@¥b¶}©l°O¿ı
+							//	ROW-H	å°‡å¾ç•«é¢çš„ä¸€åŠé–‹å§‹è¨˜éŒ„
 							temp = (value1 - value2) / 2;
 							x_temp = x / 2 + halfWidth;
 						}
@@ -90,13 +90,13 @@ void Wavelet::figureOutLH_Col(cv::Size input){
 	img_res.copyTo(img_Row_Result);
 	int halfHeight = input.height / 2;
 	int temp, value1, value2, y_temp;
-	bool isLeft = true;	
-	//	¥ı°µL¡A¦b°µH¡A¦@°µ¨â¦¸
+	bool isLeft = true;
+	//	å…ˆåšLï¼Œåœ¨åšHï¼Œå…±åšå…©æ¬¡
 	for (int i = 0; i < 2; i++){
 		for (int x = 0; x < Height_src; x++){
 			for (int y = 0; y < Width_src; y += 2){
 				if (x + 1 < Width_src - 1 && y + 1 < Height_src - 1){
-					//	¦bLH½d³ò¤º«h¶i¦æ¹Bºâ
+					//	åœ¨LHç¯„åœå…§å‰‡é€²è¡Œé‹ç®—
 					if (x < input.width&&y < input.height){
 						value1 = img_Row_Result.at < Vec3b >(y, x + 1)[0];
 						value2 = img_Row_Result.at < Vec3b >(y, x)[0];
@@ -106,12 +106,12 @@ void Wavelet::figureOutLH_Col(cv::Size input){
 							y_temp = y / 2;
 						}
 						else{
-							//	COL-H	±N±qµe­±ªº¤@¥b¶}©l°O¿ı
+							//	COL-H	å°‡å¾ç•«é¢çš„ä¸€åŠé–‹å§‹è¨˜éŒ„
 							temp = (value1 - value2) / 2;
 							y_temp = y / 2 + halfHeight;
 						}
 					}
-					//	¤Ï¤§«h°O¿ı­ì¥»¼Æ­È
+					//	åä¹‹å‰‡è¨˜éŒ„åŸæœ¬æ•¸å€¼
 					else{
 						temp = img_Row_Result.at < Vec3b >(y, x)[0];
 					}

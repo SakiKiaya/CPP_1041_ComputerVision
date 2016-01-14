@@ -1,19 +1,19 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Form1.h"
 
 using namespace CPPWindowsFormsApp;
 System::Void Form1::openImageToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
 	label1->Text = "";
-	openFileDialog1->Filter = "ÂI°}¹Ï (*.bmp)|*.bmp|All files (*.*)|*.*";	//³]©wFilter¡A¥Î¥H­­©w¨Ï¥ÎªÌ¶}±ÒªºÀÉ®×		
-	openFileDialog1->FileName = "";		//¹w³]ÀÉ®×¦WºÙ¬°ªÅ­È		
-	openFileDialog1->Title = "¸ü¤J¼v¹³";	//³]©w¸õ¥X¿ï¾Üµøµ¡ªº¼ÐÃD¦WºÙ		
-	openFileDialog1->FilterIndex = 1;	//³]©wFilter¿ï¾Ü¼Ò¦¡(¨Ì·ÓFilter¼Æ¡A¦p¥»¨Ò¿ï¾Ü1ªí¥Ü°_©l¥X²{ªº¬°ÂI°}¹Ï¡A¿ï¾Ü2ªí¥ÜAll filts)
+	openFileDialog1->Filter = "é»žé™£åœ– (*.bmp)|*.bmp|All files (*.*)|*.*";	//è¨­å®šFilterï¼Œç”¨ä»¥é™å®šä½¿ç”¨è€…é–‹å•Ÿçš„æª”æ¡ˆ		
+	openFileDialog1->FileName = "";		//é è¨­æª”æ¡ˆåç¨±ç‚ºç©ºå€¼		
+	openFileDialog1->Title = "è¼‰å…¥å½±åƒ";	//è¨­å®šè·³å‡ºé¸æ“‡è¦–çª—çš„æ¨™é¡Œåç¨±		
+	openFileDialog1->FilterIndex = 1;	//è¨­å®šFilteré¸æ“‡æ¨¡å¼(ä¾ç…§Filteræ•¸ï¼Œå¦‚æœ¬ä¾‹é¸æ“‡1è¡¨ç¤ºèµ·å§‹å‡ºç¾çš„ç‚ºé»žé™£åœ–ï¼Œé¸æ“‡2è¡¨ç¤ºAll filts)
 
 	if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK && openFileDialog1->FileName->Length > 0)
 	{
 		if (System::IO::Path::GetExtension(openFileDialog1->FileName) != ".BMP")
 			label1->Text = "Not BMP";
-		Image1 = safe_cast<Bitmap^>(Image::FromFile(openFileDialog1->FileName));	//±N¿ï¨úªºÀÉ®×Åª¨ú¨Ã¥B¦s¦ÜImage1
+		Image1 = safe_cast<Bitmap^>(Image::FromFile(openFileDialog1->FileName));	//å°‡é¸å–çš„æª”æ¡ˆè®€å–ä¸¦ä¸”å­˜è‡³Image1
 		pictureBox1->Image = Image1;
 		int debug = 0;
 	}
