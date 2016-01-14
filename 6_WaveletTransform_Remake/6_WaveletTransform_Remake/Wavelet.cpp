@@ -128,10 +128,10 @@ void Wavelet::figureOutLH_Col(cv::Size input){
 System::Drawing::Bitmap^ Wavelet::MatToBmp(Mat &input)
 {
 	return gcnew System::Drawing::Bitmap(
-		input.cols, 
-		input.rows, 
-		input.step, 
-		System::Drawing::Imaging::PixelFormat::Format24bppRgb, 
+		input.cols,
+		input.rows,
+		input.step,
+		System::Drawing::Imaging::PixelFormat::Format24bppRgb,
 		(System::IntPtr)input.ptr()
 		);
 }
