@@ -68,7 +68,7 @@ void Wavelet::figureOutLH_Row(cv::Size input){
 						}
 						else{
 							//	ROW-H	將從畫面的一半開始記錄
-							temp = (value1 - value2) / 2;
+							temp = (value1 - value2) / 2 + 128;	//	類似正規化，讓它不要出現負數
 							x_temp = x / 2 + halfWidth;
 						}
 					}
@@ -107,7 +107,7 @@ void Wavelet::figureOutLH_Col(cv::Size input){
 						}
 						else{
 							//	COL-H	將從畫面的一半開始記錄
-							temp = (value1 - value2) / 2;
+							temp = (value1 - value2) / 2 + 128;	//	類似正規化，讓它不要出現負數
 							y_temp = y / 2 + halfHeight;
 						}
 					}
