@@ -101,7 +101,7 @@ void SaltPeperClass::doMedianFilter(){
 
 	for (int y = 0; y < Height_src; y++){
 		for (int x = 0; x < Width_src; x++){
-			if (x != 0 && y != 0 && x != Width_src && y != Height_src){
+			if (x != 0 && y != 0 && x != Width_src-1 && y != Height_src-1){
 				for (int i = 0; i < 3; i++){
 					std::vector<int> pixelTemp(9);
 					pixelTemp[0] = p[ptr_bit*((x - 1) + Width_src*(y - 1)) + i];
