@@ -145,7 +145,7 @@ double HSI::figureOutS(RGB input){
 	double S = 0, BGR_min;
 	BGR_min = getMinVaule(input);
 	// S is between 0 and 1
-	if ((input.R + input.G + input.B) == 0){
+	if (input.R == input.G && input.G == input.B){
 		S = 0.0;
 	}
 	else if (S > 1){
@@ -179,7 +179,7 @@ double HSI::getMinVaule(RGB input){
 #pragma region HSI::Return_RGB
 
 RGB HSI::HSI2RGB(HSI_region input){
-	double b, g, r, degree, value1, value2;
+	double b, g, r, degree, value1, value2,	value3, value4, value5;
 	RGB result;
 	Sector mySec;
 
@@ -189,25 +189,29 @@ RGB HSI::HSI2RGB(HSI_region input){
 	value1 = input.S * cos(degree * PI / 180);	//	S * Cos(H(degree))
 	value2 = cos((60 - degree) * PI / 180);	//	Cos(60- H(degree))
 
+	value3 = (1.0 - input.S) / 3.0;
+	value4 = (1.0 + (value1 / value2)) / 3.0;
+	value5 = 1.0 - (value3 + value4);
+
 	switch (mySec.sector){
 	case 0:	//RG sector 0~120
-		b = (1.0 - input.S) / 3.0;
-		r = (1.0 + (value1 / value2)) / 3.0;
-		g = 1.0 - (r + b);
+		b = value3;
+		r = value4;
+		g = value5;
 		if (round(r + g + b) != 1)
 			int rgb_add = 0;	//	(Debug用) 驗證rgb 之關係
 		break;
 	case 1:	//GB sector 120~240
-		r = (1.0 - input.S) / 3.0;
-		g = (1.0 + (value1 / value2)) / 3.0;
-		b = 1.0 - (r + g);
+		r = value3;
+		g = value4;
+		b = value5;
 		if (round(r + g + b) != 1)
 			int rgb_add = 0;	//	(Debug用) 驗證rgb 之關係
 		break;
 	case 2:	//BR sector 240~360
-		g = (1.0 - input.S) / 3.0;
-		b = (1.0 + (value1 / value2)) / 3.0;
-		r = 1.0 - (g + b);
+		g = value3;
+		b = value4;
+		r = value5;
 		if (round(r + g + b) != 1)
 			int rgb_add = 0;	//	(Debug用) 驗證rgb 之關係
 		break;
