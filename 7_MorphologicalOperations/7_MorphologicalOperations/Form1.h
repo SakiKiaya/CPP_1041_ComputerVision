@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 namespace CPPWindowsFormsApp {
 
@@ -10,7 +10,7 @@ namespace CPPWindowsFormsApp {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Form1 ªººK­n
+	/// Form1 çš„æ‘˜è¦
 	/// </summary>
 	public ref class Form1 : public System::Windows::Forms::Form
 	{
@@ -19,13 +19,13 @@ namespace CPPWindowsFormsApp {
 		{
 			InitializeComponent();
 			//
-			//TODO:  ¦b¦¹¥[¤J«Øºc¨ç¦¡µ{¦¡½X
+			//TODO:  åœ¨æ­¤åŠ å…¥å»ºæ§‹å‡½å¼ç¨‹å¼ç¢¼
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// ²M°£¥ô¦ó¨Ï¥Î¤¤ªº¸ê·½¡C
+		/// æ¸…é™¤ä»»ä½•ä½¿ç”¨ä¸­çš„è³‡æºã€‚
 		/// </summary>
 		~Form1()
 		{
@@ -52,14 +52,14 @@ namespace CPPWindowsFormsApp {
 
 	private:
 		/// <summary>
-		/// ³]­p¤u¨ã©Ò»İªºÅÜ¼Æ¡C
+		/// è¨­è¨ˆå·¥å…·æ‰€éœ€çš„è®Šæ•¸ã€‚
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// ¦¹¬°³]­p¤u¨ã¤ä´©©Ò»İªº¤èªk - ½Ğ¤Å¨Ï¥Îµ{¦¡½X½s¿è¾¹
-		/// ­×§ï³o­Ó¤èªkªº¤º®e¡C
+		/// æ­¤ç‚ºè¨­è¨ˆå·¥å…·æ”¯æ´æ‰€éœ€çš„æ–¹æ³• - è«‹å‹¿ä½¿ç”¨ç¨‹å¼ç¢¼ç·¨è¼¯å™¨
+		/// ä¿®æ”¹é€™å€‹æ–¹æ³•çš„å…§å®¹ã€‚
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -231,31 +231,31 @@ namespace CPPWindowsFormsApp {
 
 		}
 #pragma endregion
-#pragma region ¦Û©w¸qÅÜ¼Æ
-		//«Å§iÂI°}¹Ïªº®æ¦¡
+#pragma region è‡ªå®šç¾©è®Šæ•¸
+		//å®£å‘Šé»é™£åœ–çš„æ ¼å¼
 		Bitmap^ Image1;
 		Bitmap^ Image2;
 		Bitmap^ ResultImage;
-		//«Å§i¹Ï¹³°Ï°ì(³]©w¬°±ıÅª¨ú¡B±ı­×¥¿ªº¹Ï¹³°Ï°ì)
+		//å®£å‘Šåœ–åƒå€åŸŸ(è¨­å®šç‚ºæ¬²è®€å–ã€æ¬²ä¿®æ­£çš„åœ–åƒå€åŸŸ)
 		Rectangle rect;
 		Rectangle rect2;
-		//«Å§i¬°¤@BitmapData«¬ºA¡Aªí¥Ü¹³¯À­È¦ì¸m
+		//å®£å‘Šç‚ºä¸€BitmapDataå‹æ…‹ï¼Œè¡¨ç¤ºåƒç´ å€¼ä½ç½®
 		Imaging::BitmapData^ ImageData1;
 		Imaging::BitmapData^ ImageData2;
 		Imaging::BitmapData^ ResultImageData;
-		//«Å§i¤@int®æ¦¡ªº«ü¼Ğ
+		//å®£å‘Šä¸€intæ ¼å¼çš„æŒ‡æ¨™
 		IntPtr ptr;
 		IntPtr ptr2;
 		IntPtr ResultPtr;
-		//±½ºË¼e«×- Byte¸ê®Æ¼e«×
+		//æƒç„å¯¬åº¦- Byteè³‡æ–™å¯¬åº¦
 		int BytesOfSkip;
-		//«Å§i¬°¼e«×ªº¹³¯À¸ê°T
+		//å®£å‘Šç‚ºå¯¬åº¦çš„åƒç´ è³‡è¨Š
 		int ByteNumber_Width;
 		int ByteNumber_Width2;
-		//«Å§i¤@­ÓByte®æ¦¡ªº«ü¼Ğ
+		//å®£å‘Šä¸€å€‹Byteæ ¼å¼çš„æŒ‡æ¨™
 		Byte* p;
 		Byte* R;
-		//«Å§i¤@­Ó¹³¯Àªºbitªø«×¡A¨Ñ«ü¼Ğ²¾°Ê°Ñ¦Ò
+		//å®£å‘Šä¸€å€‹åƒç´ çš„bité•·åº¦ï¼Œä¾›æŒ‡æ¨™ç§»å‹•åƒè€ƒ
 		int ptr_bit = 3;
 		int ptr_bit2 = 3;
 		//common

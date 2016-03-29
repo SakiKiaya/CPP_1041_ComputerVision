@@ -1,4 +1,4 @@
-// CPPWindowsFormsApp.cpp: ¥D­n±M®×ÀÉ¡C
+ï»¿// CPPWindowsFormsApp.cpp: ä¸»è¦å°ˆæ¡ˆæª”ã€‚
 
 #include "stdafx.h"
 #include "Form1.h"
@@ -10,11 +10,11 @@ using namespace CPPWindowsFormsApp;
 
 int main(array<System::String ^> ^args)
 {
-	//«Ø¥ß±±¨î¶µ«e¡A¥ı±Ò¥ÎwindowsªºµøÄ±¤Æ®ÄªG
+	//å»ºç«‹æ§åˆ¶é …å‰ï¼Œå…ˆå•Ÿç”¨windowsçš„è¦–è¦ºåŒ–æ•ˆæœ
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 
-	//«Ø¥ß¥Dµøµ¡¨Ã°õ¦æ
-	Application::Run(gcnew Form1());	//¶ñ¤J­è­è·s¼WªºUI Form
+	//å»ºç«‹ä¸»è¦–çª—ä¸¦åŸ·è¡Œ
+	Application::Run(gcnew Form1());	//å¡«å…¥å‰›å‰›æ–°å¢çš„UI Form
     return 0;
 }

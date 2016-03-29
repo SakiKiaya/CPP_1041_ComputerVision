@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Form1.h"
 
 using namespace CPPWindowsFormsApp;
@@ -14,22 +14,22 @@ System::Void Form1::Form1_Load(System::Object^  sender, System::EventArgs^  e){
 }
 
 System::Void Form1::openFileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
-	//===¶}¹Ï¥Dµ{¦¡===
+	//===é–‹åœ–ä¸»ç¨‹å¼===
 
-	openFileDialog1->Filter = "ÂI°}¹Ï (*.bmp)|*.bmp|All files (*.*)|*.*";	//³]©wFilter¡A¥Î¥H­­©w¨Ï¥ÎªÌ¶}±ÒªºÀÉ®×		
-	openFileDialog1->FileName = "";		//¹w³]ÀÉ®×¦WºÙ¬°ªÅ­È		
-	openFileDialog1->Title = "¸ü¤J¼v¹³";	//³]©w¸õ¥X¿ï¾Üµøµ¡ªº¼ÐÃD¦WºÙ		
-	openFileDialog1->FilterIndex = 1;	//³]©wFilter¿ï¾Ü¼Ò¦¡(¨Ì·ÓFilter¼Æ¡A¦p¥»¨Ò¿ï¾Ü1ªí¥Ü°_©l¥X²{ªº¬°ÂI°}¹Ï¡A¿ï¾Ü2ªí¥ÜAll filts)
+	openFileDialog1->Filter = "é»žé™£åœ– (*.bmp)|*.bmp|All files (*.*)|*.*";	//è¨­å®šFilterï¼Œç”¨ä»¥é™å®šä½¿ç”¨è€…é–‹å•Ÿçš„æª”æ¡ˆ		
+	openFileDialog1->FileName = "";		//é è¨­æª”æ¡ˆåç¨±ç‚ºç©ºå€¼		
+	openFileDialog1->Title = "è¼‰å…¥å½±åƒ";	//è¨­å®šè·³å‡ºé¸æ“‡è¦–çª—çš„æ¨™é¡Œåç¨±		
+	openFileDialog1->FilterIndex = 1;	//è¨­å®šFilteré¸æ“‡æ¨¡å¼(ä¾ç…§Filteræ•¸ï¼Œå¦‚æœ¬ä¾‹é¸æ“‡1è¡¨ç¤ºèµ·å§‹å‡ºç¾çš„ç‚ºé»žé™£åœ–ï¼Œé¸æ“‡2è¡¨ç¤ºAll filts)
 
-	//¸õ¥XÀÉ®×¿ï¾Üµøµ¡(ShowDialog)¡A¨Ã¥B¦pªG¨Ï¥ÎªÌÂI¿ïÀÉ®×¡A¨Ã¥BÀÉ®×¦WºÙ¶W¹L0­Ó¦r¤¸¡A«h§PÂ_¬O¬°True¡A¶i¤J³B²zµ{§Ç
+	//è·³å‡ºæª”æ¡ˆé¸æ“‡è¦–çª—(ShowDialog)ï¼Œä¸¦ä¸”å¦‚æžœä½¿ç”¨è€…é»žé¸æª”æ¡ˆï¼Œä¸¦ä¸”æª”æ¡ˆåç¨±è¶…éŽ0å€‹å­—å…ƒï¼Œå‰‡åˆ¤æ–·æ˜¯ç‚ºTrueï¼Œé€²å…¥è™•ç†ç¨‹åº
 	if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK && openFileDialog1->FileName->Length > 0){
 
-		Image1 = safe_cast<Bitmap^>(Image::FromFile(openFileDialog1->FileName));	//±N¿ï¨úªºÀÉ®×Åª¨ú¨Ã¥B¦s¦ÜImage1			
-		rect = Rectangle(0, 0, Image1->Width, Image1->Height);	//³]©wrect½d³ò¤j¤p
+		Image1 = safe_cast<Bitmap^>(Image::FromFile(openFileDialog1->FileName));	//å°‡é¸å–çš„æª”æ¡ˆè®€å–ä¸¦ä¸”å­˜è‡³Image1			
+		rect = Rectangle(0, 0, Image1->Width, Image1->Height);	//è¨­å®šrectç¯„åœå¤§å°
 
-		//¹³¯À­È¬°b,g,r¤è¦¡±Æ¦C¤U¥h¡A©Ò¥H¼e«×¹ê»Ú¤W¦³*3ªº¼Æ­È¤j¤p			
-		ByteNumber_Width = Image1->Width * 3;	//¹w³]Åª¨ú3channel¹Ï¹³			
-		pictureBox1->Image = Image1;	//Åã¥ÜImage1©óPictureBox1¤u¨ã¤W
+		//åƒç´ å€¼ç‚ºb,g,ræ–¹å¼æŽ’åˆ—ä¸‹åŽ»ï¼Œæ‰€ä»¥å¯¬åº¦å¯¦éš›ä¸Šæœ‰*3çš„æ•¸å€¼å¤§å°			
+		ByteNumber_Width = Image1->Width * 3;	//é è¨­è®€å–3channelåœ–åƒ			
+		pictureBox1->Image = Image1;	//é¡¯ç¤ºImage1æ–¼PictureBox1å·¥å…·ä¸Š
 		label1->Text = "source" + Image1->Width + "," + Image1->Height;
 		isReprocess = false;
 	}
@@ -40,7 +40,7 @@ System::Void Form1::dilationToolStripMenuItem_Click(System::Object^  sender, Sys
 	if (isReady(isOnePicture)){
 		MorphologicalImageProcessing(Morphological::Dilation, isReprocess);
 		isReprocess = true;
-		//±N¼v¹³Åã¥Ü¦bpictureBox1
+		//å°‡å½±åƒé¡¯ç¤ºåœ¨pictureBox1
 		pictureBox2->Image = ResultImage;
 		label1->Text = "source" + Image1->Width + "," + Image1->Height;
 		label2->Text = "result" + ResultImageData->Width + "," + ResultImageData->Height;
@@ -55,7 +55,7 @@ System::Void Form1::erosionToolStripMenuItem_Click(System::Object^  sender, Syst
 	if (isReady(isOnePicture)){
 		MorphologicalImageProcessing(Morphological::Erosion, isReprocess);
 		isReprocess = true;
-		//±N¼v¹³Åã¥Ü¦bpictureBox1
+		//å°‡å½±åƒé¡¯ç¤ºåœ¨pictureBox1
 		pictureBox2->Image = ResultImage;
 		label1->Text = "source" + Image1->Width + "," + Image1->Height;
 		label2->Text = "result" + ResultImageData->Width + "," + ResultImageData->Height;
@@ -71,7 +71,7 @@ System::Void Form1::openingToolStripMenuItem_Click(System::Object^  sender, Syst
 
 		MorphologicalImageProcessing(Morphological::Opening, isReprocess);
 		isReprocess = true;
-		//±N¼v¹³Åã¥Ü¦bpictureBox1
+		//å°‡å½±åƒé¡¯ç¤ºåœ¨pictureBox1
 		pictureBox2->Image = ResultImage;
 		label1->Text = "source" + Image1->Width + "," + Image1->Height;
 		label2->Text = "result" + ResultImageData->Width + "," + ResultImageData->Height;
@@ -86,7 +86,7 @@ System::Void Form1::closingToolStripMenuItem_Click(System::Object^  sender, Syst
 	if (isReady(isOnePicture)){
 		MorphologicalImageProcessing(Morphological::Closing, isReprocess);
 		isReprocess = true;
-		//±N¼v¹³Åã¥Ü¦bpictureBox1
+		//å°‡å½±åƒé¡¯ç¤ºåœ¨pictureBox1
 		pictureBox2->Image = ResultImage;
 		label1->Text = "source" + Image1->Width + "," + Image1->Height;
 		label2->Text = "result" + ResultImageData->Width + "," + ResultImageData->Height;
@@ -97,30 +97,30 @@ System::Void Form1::closingToolStripMenuItem_Click(System::Object^  sender, Syst
 }
 
 int Form1::pixelbit(System::Drawing::Imaging::PixelFormat pixelformat){
-		switch (pixelformat){
-		case System::Drawing::Imaging::PixelFormat::Format24bppRgb://¤T³q¹D
-			return 3;
-			break;
-		case System::Drawing::Imaging::PixelFormat::Format32bppRgb://¥|³q¹D
-			return 4;
-			break;
-		default:
-			return 3;
-			break;
-		}
+	switch (pixelformat){
+	case System::Drawing::Imaging::PixelFormat::Format24bppRgb://ä¸‰é€šé“
+		return 3;
+		break;
+	case System::Drawing::Imaging::PixelFormat::Format32bppRgb://å››é€šé“
+		return 4;
+		break;
+	default:
+		return 3;
+		break;
 	}
+}
 
 int Form1::resize(int res, int num){
-		switch (res){
-		case 0://°£¤G¡A°£¤£ºÉ«h+1
-			if (num % 2 != 0)
-				return num / 2 + 1;
-			else
-				return num / 2;
-			break;
-		}
-
+	switch (res){
+	case 0://é™¤äºŒï¼Œé™¤ä¸ç›¡å‰‡+1
+		if (num % 2 != 0)
+			return num / 2 + 1;
+		else
+			return num / 2;
+		break;
 	}
+
+}
 
 int Form1::HSIConverttoBOOL(bool isHSI, int vaule){
 	switch (isHSI)
@@ -162,133 +162,125 @@ bool Form1::isReady(bool isOnePicture){
 }
 
 void Form1::MorphologicalImageProcessing(Morphological func, bool isReprocess){
-		int DrawIn;
-		switch (func){
-		case Morphological::Dilation:
-			DrawIn = 255;//white
-			doMorphologicalProcessing(DrawIn, isReprocess);
-			break;
-		case Morphological::Erosion:
-			DrawIn = 0;//black
-			doMorphologicalProcessing(DrawIn, isReprocess);
-			break;
-		case Morphological::Opening:
+	int DrawIn;
+	switch (func){
+	case Morphological::Dilation:
+		DrawIn = 255;//white
+		doMorphologicalProcessing(DrawIn, isReprocess);
+		break;
+	case Morphological::Erosion:
+		DrawIn = 0;//black
+		doMorphologicalProcessing(DrawIn, isReprocess);
+		break;
+	case Morphological::Opening:
 
-			MorphologicalImageProcessing(Morphological::Erosion, isReprocess);
-			MorphologicalImageProcessing(Morphological::Dilation, true);
-			break;
-		case Morphological::Closing:
+		MorphologicalImageProcessing(Morphological::Erosion, isReprocess);
+		MorphologicalImageProcessing(Morphological::Dilation, true);
+		break;
+	case Morphological::Closing:
 
-			MorphologicalImageProcessing(Morphological::Dilation, isReprocess);
-			MorphologicalImageProcessing(Morphological::Erosion, true);
-			break;
-		}
+		MorphologicalImageProcessing(Morphological::Dilation, isReprocess);
+		MorphologicalImageProcessing(Morphological::Erosion, true);
+		break;
 	}
+}
 
 void Form1::doMorphologicalProcessing(int DrawIn, bool isReprocess){
-		rect = Rectangle(0, 0, Image1->Width, Image1->Height);
-		if (isReprocess){
-			//Src
-			Image2 = gcnew Bitmap(Width_src, Height_src, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
-			Image2 = ResultImage;
-			Width_src = Image2->Width;
-			Height_src = Image2->Height;
-			ImageData2 = Image2->LockBits(rect, System::Drawing::Imaging::ImageLockMode::ReadWrite, Image2->PixelFormat);
-			//Res
-			ResultImage = gcnew Bitmap(Width_src, Height_src, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
-			ResultImageData = ResultImage->LockBits(rect, System::Drawing::Imaging::ImageLockMode::ReadWrite, ResultImage->PixelFormat);
+	rect = Rectangle(0, 0, Image1->Width, Image1->Height);
+	if (isReprocess){
+		//Src
+		Image2 = gcnew Bitmap(Width_src, Height_src, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
+		Image2 = ResultImage;
+		Width_src = Image2->Width;
+		Height_src = Image2->Height;
+		ImageData2 = Image2->LockBits(rect, System::Drawing::Imaging::ImageLockMode::ReadWrite, Image2->PixelFormat);
+		//Res
+		ResultImage = gcnew Bitmap(Width_src, Height_src, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
+		ResultImageData = ResultImage->LockBits(rect, System::Drawing::Imaging::ImageLockMode::ReadWrite, ResultImage->PixelFormat);
 
-			ResultPtr = ResultImageData->Scan0;
-			ptr = ImageData2->Scan0;
-			R = (Byte*)(ResultPtr.ToPointer());
-			p = (Byte*)(ptr.ToPointer());
-		}
-		else{
-			//Src
-			Width_src = Image1->Width;
-			Height_src = Image1->Height;
-			ImageData1 = Image1->LockBits(rect, System::Drawing::Imaging::ImageLockMode::ReadWrite, Image1->PixelFormat);
-			//Res
-			ResultImage = gcnew Bitmap(Width_src, Height_src, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
-			ResultImageData = ResultImage->LockBits(rect, System::Drawing::Imaging::ImageLockMode::ReadWrite, ResultImage->PixelFormat);
-			ResultPtr = ResultImageData->Scan0;
-			ptr = ImageData1->Scan0;
-			R = (Byte*)(ResultPtr.ToPointer());
-			p = (Byte*)(ptr.ToPointer());
-		}
+		ResultPtr = ResultImageData->Scan0;
+		ptr = ImageData2->Scan0;
+		R = (Byte*)(ResultPtr.ToPointer());
+		p = (Byte*)(ptr.ToPointer());
+	}
+	else{
+		//Src
+		Width_src = Image1->Width;
+		Height_src = Image1->Height;
+		ImageData1 = Image1->LockBits(rect, System::Drawing::Imaging::ImageLockMode::ReadWrite, Image1->PixelFormat);
+		//Res
+		ResultImage = gcnew Bitmap(Width_src, Height_src, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
+		ResultImageData = ResultImage->LockBits(rect, System::Drawing::Imaging::ImageLockMode::ReadWrite, ResultImage->PixelFormat);
+		ResultPtr = ResultImageData->Scan0;
+		ptr = ImageData1->Scan0;
+		R = (Byte*)(ResultPtr.ToPointer());
+		p = (Byte*)(ptr.ToPointer());
+	}
 
-		ptr_bit = pixelbit(Image1->PixelFormat);
-		ptr_bit2 = pixelbit(ResultImage->PixelFormat);
-		for (int y = 0; y < Height_src; y++){
-			for (int x = 0; x < Width_src; x++){
-				if (x != 0 && y != 0 && x != Width_src - 1 && y != Height_src - 1){
-					bool findEdge = false;
-					if (p[ptr_bit*(x + Width_src*y)] == 255)
-						findEdge = true;
-					if (findEdge){
-						for (int i = 0; i < 3; i++){
-							vector<int> pixelTemp(9);
+	ptr_bit = pixelbit(Image1->PixelFormat);
+	ptr_bit2 = pixelbit(ResultImage->PixelFormat);
+	for (int y = 0; y < Height_src; y++){
+		for (int x = 0; x < Width_src; x++){
+			if (x != 0 && y != 0 && x != Width_src - 1 && y != Height_src - 1){
+				bool findEdge = false;
+				if (p[ptr_bit*(x + Width_src*y)] == 255)
+					findEdge = true;
+				if (findEdge){
+					for (int i = 0; i < 3; i++){
+						vector<int> pixelTemp(9);
 #pragma region pixelTemp
-							pixelTemp[0] =
-								HSIConverttoBOOL(isHSI, p[ptr_bit*((x - 1) + Width_src*(y - 1)) + i]);
-							pixelTemp[1] =
-								HSIConverttoBOOL(isHSI, p[ptr_bit*(x + Width_src*(y - 1)) + i]);
-							pixelTemp[2] =
-								HSIConverttoBOOL(isHSI, p[ptr_bit*((x + 1) + Width_src*(y - 1)) + i]);
+						pixelTemp[0] =
+							HSIConverttoBOOL(isHSI, p[ptr_bit*((x - 1) + Width_src*(y - 1)) + i]);
+						pixelTemp[1] =
+							HSIConverttoBOOL(isHSI, p[ptr_bit*(x + Width_src*(y - 1)) + i]);
+						pixelTemp[2] =
+							HSIConverttoBOOL(isHSI, p[ptr_bit*((x + 1) + Width_src*(y - 1)) + i]);
 
-							pixelTemp[3] =
-								HSIConverttoBOOL(isHSI, p[ptr_bit*((x - 1) + Width_src*y) + i]);
-							pixelTemp[4] =
-								HSIConverttoBOOL(isHSI, p[ptr_bit*(x + Width_src*y) + i]);
-							pixelTemp[5] =
-								HSIConverttoBOOL(isHSI, p[ptr_bit*((x + 1) + Width_src*y) + i]);
+						pixelTemp[3] =
+							HSIConverttoBOOL(isHSI, p[ptr_bit*((x - 1) + Width_src*y) + i]);
+						pixelTemp[4] =
+							HSIConverttoBOOL(isHSI, p[ptr_bit*(x + Width_src*y) + i]);
+						pixelTemp[5] =
+							HSIConverttoBOOL(isHSI, p[ptr_bit*((x + 1) + Width_src*y) + i]);
 
-							pixelTemp[6] =
-								HSIConverttoBOOL(isHSI, p[ptr_bit*((x - 1) + Width_src*(y + 1)) + i]);
-							pixelTemp[7] =
-								HSIConverttoBOOL(isHSI, p[ptr_bit*(x + Width_src*(y + 1)) + i]);
-							pixelTemp[8] =
-								HSIConverttoBOOL(isHSI, p[ptr_bit*((x + 1) + Width_src*(y + 1)) + i]);
+						pixelTemp[6] =
+							HSIConverttoBOOL(isHSI, p[ptr_bit*((x - 1) + Width_src*(y + 1)) + i]);
+						pixelTemp[7] =
+							HSIConverttoBOOL(isHSI, p[ptr_bit*(x + Width_src*(y + 1)) + i]);
+						pixelTemp[8] =
+							HSIConverttoBOOL(isHSI, p[ptr_bit*((x + 1) + Width_src*(y + 1)) + i]);
 #pragma endregion
-							bool isOnEdge = false;
+						bool isOnEdge = false;
 
-							int j = 0;
-							do{
-								if (pixelTemp[j] == 0){
-									isOnEdge = true;
-									break;
-								}
-								else
-									j++;
-							} while (j < 9);
-
-							if (isOnEdge){
-								R[ptr_bit*((x - 1) + Width_src*(y - 1) + i)] = DrawIn;
-								R[ptr_bit*(x + Width_src*(y - 1)) + i] = DrawIn;
-								R[ptr_bit*((x + 1) + Width_src*(y - 1)) + i] = DrawIn;
-
-								R[ptr_bit*((x - 1) + Width_src*y) + i] = DrawIn;
-								R[ptr_bit*(x + Width_src*y) + i] = DrawIn;
-								R[ptr_bit*((x + 1) + Width_src*y) + i] = DrawIn;
-
-								R[ptr_bit*((x - 1) + Width_src*(y + 1)) + i] = DrawIn;
-								R[ptr_bit*(x + Width_src*(y + 1)) + i] = DrawIn;
-								R[ptr_bit*((x + 1) + Width_src*(y + 1)) + i] = DrawIn;
+						int j = 0;
+						do{
+							if (pixelTemp[j] == 0){
+								isOnEdge = true;
+								break;
 							}
-							else{
-								R[3 * (x + Width_src*y) + i] = p[3 * (x + Width_src*y) + i];
-							}
+							else
+								j++;
+						} while (j < 9);
+
+						if (isOnEdge){
+							R[ptr_bit*((x - 1) + Width_src*(y - 1) + i)] = DrawIn;
+							R[ptr_bit*(x + Width_src*(y - 1)) + i] = DrawIn;
+							R[ptr_bit*((x + 1) + Width_src*(y - 1)) + i] = DrawIn;
+
+							R[ptr_bit*((x - 1) + Width_src*y) + i] = DrawIn;
+							R[ptr_bit*(x + Width_src*y) + i] = DrawIn;
+							R[ptr_bit*((x + 1) + Width_src*y) + i] = DrawIn;
+
+							R[ptr_bit*((x - 1) + Width_src*(y + 1)) + i] = DrawIn;
+							R[ptr_bit*(x + Width_src*(y + 1)) + i] = DrawIn;
+							R[ptr_bit*((x + 1) + Width_src*(y + 1)) + i] = DrawIn;
 						}
-					}
-					else{
-						if (R[3 * (x + Width_src*y) + 0] != 255){
-							R[3 * (x + Width_src*y) + 0] = p[3 * (x + Width_src*y) + 0];
-							R[3 * (x + Width_src*y) + 1] = p[3 * (x + Width_src*y) + 1];
-							R[3 * (x + Width_src*y) + 2] = p[3 * (x + Width_src*y) + 2];
+						else{
+							R[3 * (x + Width_src*y) + i] = p[3 * (x + Width_src*y) + i];
 						}
 					}
 				}
-				else {
+				else{
 					if (R[3 * (x + Width_src*y) + 0] != 255){
 						R[3 * (x + Width_src*y) + 0] = p[3 * (x + Width_src*y) + 0];
 						R[3 * (x + Width_src*y) + 1] = p[3 * (x + Width_src*y) + 1];
@@ -296,15 +288,23 @@ void Form1::doMorphologicalProcessing(int DrawIn, bool isReprocess){
 					}
 				}
 			}
-		}
-		//Unlock
-		if (!isReprocess){
-			Image1->UnlockBits(ImageData1);
-			ResultImage->UnlockBits(ResultImageData);
-		}
-		else
-		{
-			Image2->UnlockBits(ImageData2);
-			ResultImage->UnlockBits(ResultImageData);
+			else {
+				if (R[3 * (x + Width_src*y) + 0] != 255){
+					R[3 * (x + Width_src*y) + 0] = p[3 * (x + Width_src*y) + 0];
+					R[3 * (x + Width_src*y) + 1] = p[3 * (x + Width_src*y) + 1];
+					R[3 * (x + Width_src*y) + 2] = p[3 * (x + Width_src*y) + 2];
+				}
+			}
 		}
 	}
+	//Unlock
+	if (!isReprocess){
+		Image1->UnlockBits(ImageData1);
+		ResultImage->UnlockBits(ResultImageData);
+	}
+	else
+	{
+		Image2->UnlockBits(ImageData2);
+		ResultImage->UnlockBits(ResultImageData);
+	}
+}

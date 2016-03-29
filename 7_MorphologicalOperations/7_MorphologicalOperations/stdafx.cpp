@@ -1,6 +1,6 @@
-// stdafx.cpp : ¶È¥]§t¼Ğ·Ç Include ÀÉªº­ì©lµ{¦¡ÀÉ
-// CPPWindowsFormsApp.pch ·|¦¨¬°¥ı¦æ½sÄ¶¼ĞÀYÀÉ
-// stdafx.obj ·|¥]§t¥ı¦æ½sÄ¶Ãş«¬¸ê°T
+ï»¿// stdafx.cpp : åƒ…åŒ…å«æ¨™æº– Include æª”çš„åŸå§‹ç¨‹å¼æª”
+// CPPWindowsFormsApp.pch æœƒæˆç‚ºå…ˆè¡Œç·¨è­¯æ¨™é ­æª”
+// stdafx.obj æœƒåŒ…å«å…ˆè¡Œç·¨è­¯é¡å‹è³‡è¨Š
 
 #include "stdafx.h"
 
