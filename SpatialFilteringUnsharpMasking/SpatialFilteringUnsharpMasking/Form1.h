@@ -88,9 +88,9 @@ namespace CPPWindowsFormsApp {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea3 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
-			System::Windows::Forms::DataVisualization::Charting::Legend^  legend3 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series3 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^  legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->openToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -129,7 +129,7 @@ namespace CPPWindowsFormsApp {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(1056, 30);
+			this->menuStrip1->Size = System::Drawing::Size(1056, 27);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -137,28 +137,28 @@ namespace CPPWindowsFormsApp {
 			// 
 			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->openToolStripMenuItem });
 			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
-			this->fileToolStripMenuItem->Size = System::Drawing::Size(49, 26);
+			this->fileToolStripMenuItem->Size = System::Drawing::Size(45, 23);
 			this->fileToolStripMenuItem->Text = L"File";
 			// 
 			// openToolStripMenuItem
 			// 
 			this->openToolStripMenuItem->Name = L"openToolStripMenuItem";
-			this->openToolStripMenuItem->Size = System::Drawing::Size(125, 26);
+			this->openToolStripMenuItem->Size = System::Drawing::Size(122, 26);
 			this->openToolStripMenuItem->Text = L"Open";
 			this->openToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::openToolStripMenuItem_Click);
 			// 
 			// spatialFilteringToolStripMenuItem
 			// 
 			this->spatialFilteringToolStripMenuItem->Name = L"spatialFilteringToolStripMenuItem";
-			this->spatialFilteringToolStripMenuItem->Size = System::Drawing::Size(143, 26);
+			this->spatialFilteringToolStripMenuItem->Size = System::Drawing::Size(130, 23);
 			this->spatialFilteringToolStripMenuItem->Text = L"Spatial Filtering";
 			// 
 			// groupBox1
 			// 
 			this->groupBox1->Controls->Add(this->pictureBox_Src);
-			this->groupBox1->Location = System::Drawing::Point(12, 97);
+			this->groupBox1->Location = System::Drawing::Point(12, 104);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(500, 514);
+			this->groupBox1->Size = System::Drawing::Size(500, 551);
 			this->groupBox1->TabIndex = 1;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Source image";
@@ -166,9 +166,10 @@ namespace CPPWindowsFormsApp {
 			// pictureBox_Src
 			// 
 			this->pictureBox_Src->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->pictureBox_Src->Location = System::Drawing::Point(3, 20);
+			this->pictureBox_Src->Location = System::Drawing::Point(3, 21);
 			this->pictureBox_Src->Name = L"pictureBox_Src";
-			this->pictureBox_Src->Size = System::Drawing::Size(494, 491);
+			this->pictureBox_Src->Size = System::Drawing::Size(494, 527);
+			this->pictureBox_Src->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox_Src->TabIndex = 0;
 			this->pictureBox_Src->TabStop = false;
 			// 
@@ -178,7 +179,7 @@ namespace CPPWindowsFormsApp {
 			this->groupBox2->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->groupBox2->Location = System::Drawing::Point(3, 3);
 			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(506, 517);
+			this->groupBox2->Size = System::Drawing::Size(506, 554);
 			this->groupBox2->TabIndex = 2;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Result image";
@@ -186,9 +187,10 @@ namespace CPPWindowsFormsApp {
 			// pictureBox_Res
 			// 
 			this->pictureBox_Res->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->pictureBox_Res->Location = System::Drawing::Point(3, 20);
+			this->pictureBox_Res->Location = System::Drawing::Point(3, 21);
 			this->pictureBox_Res->Name = L"pictureBox_Res";
-			this->pictureBox_Res->Size = System::Drawing::Size(500, 494);
+			this->pictureBox_Res->Size = System::Drawing::Size(500, 530);
+			this->pictureBox_Res->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox_Res->TabIndex = 1;
 			this->pictureBox_Res->TabStop = false;
 			// 
@@ -196,20 +198,20 @@ namespace CPPWindowsFormsApp {
 			// 
 			this->tabControl1->Controls->Add(this->tabPage1);
 			this->tabControl1->Controls->Add(this->tabPage2);
-			this->tabControl1->Location = System::Drawing::Point(518, 71);
+			this->tabControl1->Location = System::Drawing::Point(518, 76);
 			this->tabControl1->Multiline = true;
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(520, 550);
+			this->tabControl1->Size = System::Drawing::Size(520, 589);
 			this->tabControl1->TabIndex = 3;
 			// 
 			// tabPage1
 			// 
 			this->tabPage1->Controls->Add(this->groupBox2);
-			this->tabPage1->Location = System::Drawing::Point(4, 23);
+			this->tabPage1->Location = System::Drawing::Point(4, 25);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(512, 523);
+			this->tabPage1->Size = System::Drawing::Size(512, 560);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Result";
 			this->tabPage1->UseVisualStyleBackColor = true;
@@ -217,37 +219,37 @@ namespace CPPWindowsFormsApp {
 			// tabPage2
 			// 
 			this->tabPage2->Controls->Add(this->chart1);
-			this->tabPage2->Location = System::Drawing::Point(4, 23);
+			this->tabPage2->Location = System::Drawing::Point(4, 25);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(512, 523);
+			this->tabPage2->Size = System::Drawing::Size(512, 560);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"Histogram Chart";
 			this->tabPage2->UseVisualStyleBackColor = true;
 			// 
 			// chart1
 			// 
-			chartArea3->Name = L"ChartArea1";
-			this->chart1->ChartAreas->Add(chartArea3);
-			legend3->Enabled = false;
-			legend3->Name = L"Legend1";
-			this->chart1->Legends->Add(legend3);
-			this->chart1->Location = System::Drawing::Point(6, 106);
+			chartArea1->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea1);
+			legend1->Enabled = false;
+			legend1->Name = L"Legend1";
+			this->chart1->Legends->Add(legend1);
+			this->chart1->Location = System::Drawing::Point(6, 114);
 			this->chart1->Name = L"chart1";
-			series3->ChartArea = L"ChartArea1";
-			series3->IsVisibleInLegend = false;
-			series3->Legend = L"Legend1";
-			series3->Name = L"Series1";
-			this->chart1->Series->Add(series3);
-			this->chart1->Size = System::Drawing::Size(500, 300);
+			series1->ChartArea = L"ChartArea1";
+			series1->IsVisibleInLegend = false;
+			series1->Legend = L"Legend1";
+			series1->Name = L"Series1";
+			this->chart1->Series->Add(series1);
+			this->chart1->Size = System::Drawing::Size(500, 321);
 			this->chart1->TabIndex = 0;
 			this->chart1->Text = L"chart1";
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(434, 71);
+			this->button1->Location = System::Drawing::Point(434, 76);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->Size = System::Drawing::Size(75, 25);
 			this->button1->TabIndex = 4;
 			this->button1->Text = L"銳化";
 			this->button1->UseVisualStyleBackColor = true;
@@ -256,19 +258,19 @@ namespace CPPWindowsFormsApp {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(383, 50);
+			this->label1->Location = System::Drawing::Point(383, 54);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(53, 15);
+			this->label1->Size = System::Drawing::Size(52, 15);
 			this->label1->TabIndex = 5;
 			this->label1->Text = L"SMAX:";
 			// 
 			// trackBar1
 			// 
-			this->trackBar1->Location = System::Drawing::Point(12, 42);
+			this->trackBar1->Location = System::Drawing::Point(12, 45);
 			this->trackBar1->Maximum = 255;
 			this->trackBar1->Minimum = 30;
 			this->trackBar1->Name = L"trackBar1";
-			this->trackBar1->Size = System::Drawing::Size(365, 50);
+			this->trackBar1->Size = System::Drawing::Size(365, 56);
 			this->trackBar1->TabIndex = 6;
 			this->trackBar1->Value = 30;
 			this->trackBar1->ValueChanged += gcnew System::EventHandler(this, &Form1::trackBar1_ValueChanged);
@@ -276,9 +278,9 @@ namespace CPPWindowsFormsApp {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(586, 53);
+			this->label2->Location = System::Drawing::Point(586, 57);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(374, 15);
+			this->label2->Size = System::Drawing::Size(308, 15);
 			this->label2->TabIndex = 7;
 			this->label2->Text = L"Change the trackbar to change SMax, and SMin is 0.";
 			// 
@@ -288,9 +290,9 @@ namespace CPPWindowsFormsApp {
 			// 
 			// Form1
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 14);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1056, 629);
+			this->ClientSize = System::Drawing::Size(1056, 674);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->trackBar1);
 			this->Controls->Add(this->label1);

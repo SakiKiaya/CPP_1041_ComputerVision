@@ -67,7 +67,7 @@ void UnsharpClass::doLowpassFilter(int level){
 
 	for (int y = 0; y < Height_src; y++){
 		for (int x = 0; x < Width_src; x++){
-			if (x != 0 && y != 0 && x != Width_src && y != Height_src){			// If is not edge
+			if (x != 0 && y != 0 && x != Width_src-1 && y != Height_src-1){			// If is not edge
 				for (int i = 0; i < 3; i++){
 					std::vector<int> pixelTemp(9);
 					pixelTemp[0] = kernel[0] * p[ptr_bit*((x - 1) + Width_src*(y - 1)) + i];		// Inside of kernel all of pixel were multiplied by kernel's weight
@@ -177,11 +177,11 @@ void UnsharpClass::doPixelDiff(){
 	R = (Byte*)((System::Void*)ptr2);	// R = beta
 	for (int y = 0; y < Image1->Height; y++){
 		for (int x = 0; x < Image1->Width; x++){
-			int pixel = p[0] - R[0];	// diff
+			int pixel = p[0] - (R[0]+R[1]+R[2])/3;	// diff
 			// 像素值填入
-			R[0] = (Byte)pixel;	//填入像素值 channel 0 (Blue)
-			R[1] = (Byte)pixel;	//填入像素值 channel 1 (Green)
-			R[2] = (Byte)pixel;	//填入像素值 channel 2 (Red)
+			R[0] = (Byte)pixel>0 ? (Byte)pixel : 0;	//填入像素值 channel 0 (Blue)
+			R[1] = (Byte)pixel>0 ? (Byte)pixel : 0;	//填入像素值 channel 1 (Green)
+			R[2] = (Byte)pixel>0 ? (Byte)pixel : 0;	//填入像素值 channel 2 (Red)
 
 			// 指到下一個像素資訊
 			p += ptr_bit;
