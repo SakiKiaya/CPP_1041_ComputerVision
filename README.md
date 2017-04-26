@@ -1,7 +1,7 @@
 # CPP_1041_ComputerVision
-##摘要
+## 摘要
 本專案主要為紀錄我在學習基本電腦影像處理時的作業程式，並藉此來學習如何使用Git來進行版本控制。
-##作業內容
+## 作業內容
 1. 灰階圖的直方圖均衡化 
 Histogram Equalization for gray image.
 
@@ -26,7 +26,7 @@ Use the Morphological Operations Erosion and Dilation to achieve opening and clo
 8. 運用三步搜尋法以及鑽石搜尋法尋找影片中的移動向量
 Block Matching with two search method that is called TSSearch(Three Step Search) and UCBDSearch(Diamond search).
 
-##執行環境
+## 執行環境
 + Visual studio 2013
 + VC++ 12
 + OpenCV 2.4.9 library (just for open file and do some simple method)
